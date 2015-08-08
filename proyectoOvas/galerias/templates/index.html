@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link type="text/css"
+	href="/site_media/css/custom-theme/jquery-ui-1.8.22.custom.css"
+	rel="stylesheet" />
+<script type="text/javascript" src="/site_media/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript"
+	src="/site_media/js/jquery-ui-1.8.22.custom.min.js"></script>
+
+
+<script type="text/javascript">
+	$(function() {
+		$("#accordion").accordion();
+	});
+	$(function() {
+		$("input[type=submit],a").button()
+	});
+</script>
+<title>Galeria de Fotos</title>
+<style>
+#header {
+	background-color: #fafafa;
+	border-spacing: 5px;
+	padding: 1px;
+	border-bottom:1px solid #eee;
+}
+
+#accordion {
+	width: 350px;
+	padding: 10px;
+}
+
+#galeria {
+	overflow:hidden;
+	margin:4px 17px 0 18px;
+	display: block;
+}
+
+#itemGaleria {
+	float:left;
+	position:relative;
+	display:none;
+	margin:2px;
+	border:1px solid #eee;
+	box-sizing:content-box;
+	overflow:hidden;
+	display: block;
+}
+
+#footer {
+	background-color: #fafafa;
+	border-bottom:1px solid #eee;
+}
+</style>
+</head>
+
+
+<body>
+
+	<div id="header">
+		<h2>Galeria de Imágenes - Procesos de Desarrollo Agiles</h2>
+	</div>
+
+	<div id="accordion">
+		<div>
+			<br>
+			<form ACTION="/galerias/" METHOD="POST">
+				{% csrf_token %}
+
+				<table border=0 cellpadding="3px" cellspacing="2px">
+					<tr>
+						<td><font size=2><b>{{form.url.label}}</b></font></td>
+						<td>{{form.url}}</td>
+					</tr>
+					<br>
+					<tr>
+						<td><font size=2><b>{{form.user.label}}</b></font></td>
+						<td>{{form.user}}</td>
+					</tr>
+
+				</table>
+				<br>
+				<div class="boton">
+					<input type="submit" value="Guardar" />
+					<!--{% if msj != '' %}
+					<div id="dialog1" title="Alerta" style="text-align: left">
+						<p style="color: red; font-weight: bold; text-align: center">{{
+							msj }}</p>
+					</div>
+					{%endif%}
+					-->
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="galeria">
+		{% for foto in galerias %}
+			<div id="itemGaleria">
+				<img src="{{foto.url}}"
+						border="2px" alt="{{foto.url}}" title="{{foto.user}}" width="170px"
+						height="140px" /> <br> {{foto.date}} 
+			</div>
+		{% endfor %}
+	</div>
+
+	<div id="footer"><h4>Grupo 1: Adriana Marcela Osorio F. -
+		Efrain César Perez - Juan Camilo Cerquera - Andres Felipe Osorio -
+		Jamil Murcia</h4>
+	</div>
+
+</body>
+
+</html>
